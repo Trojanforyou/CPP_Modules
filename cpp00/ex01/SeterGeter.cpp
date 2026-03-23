@@ -6,52 +6,49 @@
 /*   By: msokolov <msokolov@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 17:20:30 by msokolov          #+#    #+#             */
-/*   Updated: 2026/02/08 22:42:55 by msokolov         ###   ########.fr       */
+/*   Updated: 2026/03/21 11:50:28 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Phonebook.hpp"
 
-void    Contact::setFirstName(std::string arg)
+void Contact::SetFName(std::string FName)
 {
-    _FirstName = arg;
+    _FName = FName;
 }
-void    Contact::setLasName(std::string arg)
+void Contact::SetLName(std::string LName)
 {
-    _LastName = arg;
+    _LName = LName;
 }
-void    Contact::setPhone(std::string arg)
+void Contact::SetNickname(std::string Nickname)
 {
-    _Phone = arg;
+    _Nickname = Nickname;
 }
-void    Contact::setNickname(std::string arg)
+void Contact::SetNumber(std::string Number)
 {
-    _Nickname = arg;
+    _Number = Number;
 }
-void    Contact::setSecret(std::string arg)
+void Contact::SetSecret(std::string Secret)
 {
-    _Secret = arg;
+    _Secret = Secret;
 }
-
-std::string Contact::getFirstname()
+std::string Contact::GetFName()
 {
-    return (_FirstName);
+    return(_FName);
 }
-std::string Contact::getLastname()
+std::string Contact::GetLName()
 {
-    return (_LastName);
+    return(_LName);
 }
-std::string Contact::getNickname()
+std::string Contact::GetNickname()
 {
-    return (_Nickname);
+    return(_Nickname);
 }
-std::string Contact::getPhone()
+std::string Contact::GetNumber()
 {
-    return (_Phone);
+    return(_Number);
 }
-std::string Contact::getSecret()
+std::string Contact::GetSecret()
 {
-    return (_Secret);
+    return(_Secret);
 }
-
- 

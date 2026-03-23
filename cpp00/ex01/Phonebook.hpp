@@ -6,44 +6,43 @@
 /*   By: msokolov <msokolov@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 15:12:34 by msokolov          #+#    #+#             */
-/*   Updated: 2026/02/10 18:17:41 by msokolov         ###   ########.fr       */
+/*   Updated: 2026/03/23 10:03:15 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <string.h>
-#include <iomanip>
 
-class   Contact
+struct Contact
 {
     private:
-        std::string _FirstName;
-        std::string _LastName;
-        std::string _Phone;
+    std::string _FName;
+        std::string _LName;
         std::string _Nickname;
+        std::string _Number;
         std::string _Secret;
     public:
-        void    setFirstName(std::string arg);
-        void    setLasName(std::string arg);
-        void    setNickname(std::string arg);
-        void    setPhone(std::string arg);
-        void    setSecret(std::string arg);
-        std::string getFirstname();
-        std::string getLastname();
-        std::string getNickname();
-        std::string getPhone();
-        std::string getSecret();
-};
-
-class   Phonebook
+        void SetFName(std::string FName);
+        void SetLName(std::string Lname);
+        void SetNickname(std::string Nickname);
+        void SetNumber(std::string Number);
+        void SetSecret(std::string Secret);
+        std::string GetFName();
+        std::string GetLName();
+        std::string GetNickname();
+        std::string GetNumber();
+        std::string GetSecret();
+        std::string ReadLine(const std::string &Prompt);
+    };      
+struct Phonebook
 {
     private:
-        Contact contacts[8];
+        static const int buf = 8;
+        Contact _Contact[buf];
         int index = 0;
+        int size = 0;
     public:
-        void    Add();
-        void    Search();
-        void    Empty();
-        void    SearchForContact();
+        void    Add(Contact &info);
+        std::string    Search(Contact &info);
+        std::string    SearchByIndex(Contact &info);
 };
