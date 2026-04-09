@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:54:44 by msokolov          #+#    #+#             */
-/*   Updated: 2026/04/09 13:23:17 by msokolov         ###   ########.fr       */
+/*   Updated: 2026/04/09 13:30:35 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ ClapTrap::ClapTrap()
 {
 	std::cout << "Default Constructor Called" << std::endl;
 }
-ClapTrap ClapTrap::operator=(const ClapTrap &other)
+ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
 	if (this != &other)
 	{
