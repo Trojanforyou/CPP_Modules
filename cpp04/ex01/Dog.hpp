@@ -1,10 +1,12 @@
 #pragma once
 
 #include "Animal.hpp"
+#include "brain.hpp"
 
 class Dog: public Animal
 {
 	public:
+		Brain *_ideas;
 		Dog();
 		~Dog();
 		Dog(std::string type);
@@ -12,4 +14,5 @@ class Dog: public Animal
 		Dog(const Dog &other);
 		void	makeSound() const override;
 		std::string getType()const;
+		Brain	*getBrain() const;
 };

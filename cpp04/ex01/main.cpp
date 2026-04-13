@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 13:18:15 by msokolov          #+#    #+#             */
-/*   Updated: 2026/04/12 15:00:03 by msokolov         ###   ########.fr       */
+/*   Updated: 2026/04/12 15:01:13 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 #include "WrongCat.hpp"
 int main()
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog("Dog");
-	const Animal* i = new Cat("Cat");
-	const WrongAnimal* k = new Wrongcat("nun");
-	std::cout << k->getType() << " " << std::endl;
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
-	k->makeSound();
-	delete meta;
-	delete k;
-	delete i;
-	delete j;
+    Dog original;
+
+    original.getBrain()->_ideas[0] = "I am the original dog.";
+
+    std::cout << "Original " << original.getBrain()->_ideas[0] << std::endl;
+
+    Dog copy = original;
+    std::cout << "Copy: " << copy.getBrain()->_ideas[0] << std::endl;
+
+    original.getBrain()->_ideas[0] = "My idea has changed!";
+    std::cout << "Original new: " << original.getBrain()->_ideas[0] << std::endl;
+
+    std::cout << "Copy'" << copy.getBrain()->_ideas[0] << std::endl;
+
+    return 0;
 }

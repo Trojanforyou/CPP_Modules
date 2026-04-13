@@ -1,9 +1,12 @@
 #pragma once
 
 #include "Animal.hpp"
+#include "brain.hpp"
 
 class Cat: public Animal
 {
+	private:
+		Brain *_ideas;
 	public:
 		Cat();
 		~Cat();
@@ -12,4 +15,5 @@ class Cat: public Animal
 		Cat &operator=(const Cat &other);
 		void	makeSound() const override;
 		std::string getType()const;
+		Brain *getBrain() const;
 };

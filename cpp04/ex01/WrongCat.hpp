@@ -4,6 +4,8 @@
 
 class Wrongcat: public WrongAnimal
 {
+	private:
+		std::string _type;
 	public:
 		Wrongcat();
 		~Wrongcat();

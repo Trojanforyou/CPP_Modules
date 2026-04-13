@@ -1,0 +1,16 @@
+#pragma once
+
+
+#include <iostream>
+#include <string>
+
+class Brain
+{
+	public:
+		std::string _ideas[100];
+		Brain();
+		~Brain();
+		Brain(const Brain &other);
+		Brain &operator=(const Brain &other);
+
+};
