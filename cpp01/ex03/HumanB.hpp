@@ -1,5 +1,4 @@
-#ifndef HUMAN_B_HPP
-#define HUMAN_B_HPP
+#pragma once
 
 #include "Weapon.hpp"
 
@@ -12,10 +11,7 @@ struct HumanB
 		Weapon	getName();
 		void	setWeapon(Weapon &gun);
 		void	attack();
-
-		HumanB(std::string name): _name(name){}
+		HumanB(std::string name);
 
 };
 
-
-#endif

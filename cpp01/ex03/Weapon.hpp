@@ -11,7 +11,7 @@ struct Weapon
 	public:
 		void	setType(std::string type);
 		std::string	getType();
-    Weapon(std::string type): _type(type){}
+    Weapon(std::string type);
 };
 
 #endif
