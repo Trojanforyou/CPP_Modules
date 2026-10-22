@@ -7,7 +7,7 @@ std::ostream &operator<<(std::ostream &os, const Bureaucrat &b){
 
 void	Bureaucrat::increaseGrade(){
 	if (_grade <= 1)
-		throw GradeTooHighExcepion();
+		throw GradeTooHighException();
 	_grade--;
 }
 
@@ -20,11 +20,11 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name){
 	if (grade > 150)
 		throw GradeTooLowException();
 	else if (grade < 1)
-		throw GradeTooHighExcepion();
+		throw GradeTooHighException();
 	else
 		_grade = grade;
 }
-Bureaucrat::Bureaucrat(const Bureaucrat &other){
+Bureaucrat::Bureaucrat(const Bureaucrat &other):_name(other._name){
 	std::cout << "Copy constructer called" << '\n';
 	this->_grade = other._grade;
 }

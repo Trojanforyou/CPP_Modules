@@ -13,7 +13,7 @@ class Bureaucrat
 	Bureaucrat &operator=(const Bureaucrat &other);
 
 	const std::string getName() const {return(_name);};
-	const int	getGrade() const {return(_grade);};
+	int	getGrade() const {return(_grade);};
 
 	void	increaseGrade();
 	void	decreaseGrade();
@@ -23,7 +23,7 @@ class Bureaucrat
 			return ("Grade is too low");
 		}
 	};
-	class GradeTooHighExcepion :public std::exception{
+	class GradeTooHighException :public std::exception{
 		const char *what() const noexcept override{
 			return ("Grade is too high");
 		}

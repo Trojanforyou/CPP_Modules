@@ -7,19 +7,56 @@
 
 int main()
 {
-	std::cout << "___ShrubberyCreationForm___" << '\n';
-	Bureaucrat bureaucrat1("Arda", 40);
-	ShrubberyCreationForm form1("home");
-	Intern intern;
-	bureaucrat1.signForm(form1);
-	try
-	{
-		form1.execute(bureaucrat1);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	AForm *tmp = intern.makeForm("shrubbery creation", "bender");
-	delete (tmp);
+    Intern intern;
+    Bureaucrat bureaucrat("Arda", 40);
+
+    std::cout << "\n___ShrubberyCreationForm___\n";
+    try
+    {
+        AForm *tmp = intern.makeForm("shrubbery creation", "bender");
+        bureaucrat.signForm(*tmp);
+        bureaucrat.executeForm(*tmp);
+        delete tmp;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
+    std::cout << "\n___RobotomyRequestForm___\n";
+    try
+    {
+        AForm *tmp = intern.makeForm("robotomy request", "Marvin");
+        bureaucrat.signForm(*tmp);
+        bureaucrat.executeForm(*tmp);
+        delete tmp;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
+    std::cout << "\n___PresidentialPardonForm___\n";
+    try
+    {
+        AForm *tmp = intern.makeForm("presidential pardon", "Ford");
+        bureaucrat.signForm(*tmp);
+        bureaucrat.executeForm(*tmp);
+        delete tmp;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+
+    std::cout << "\n___Unknown Form___\n";
+    try
+    {
+        AForm *tmp = intern.makeForm("unknown form", "target");
+        delete tmp;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }

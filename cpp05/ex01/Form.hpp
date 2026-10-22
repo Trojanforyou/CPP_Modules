@@ -16,7 +16,7 @@ class Form{
 				return ("Grade is too low");
 			}
 		};
-		class GradeTooHighExcepion :public std::exception{
+		class GradeTooHighException :public std::exception{
 			const char *what() const noexcept override{
 				return ("Grade is too high");
 			}
@@ -27,13 +27,12 @@ class Form{
 		Form(const Form &other);
 		Form &operator=(const Form &other);
 
-		const bool			GetSigned() const {return(_signed);};
+		bool				GetSigned() const {return(_signed);};
 		const std::string	GetName() const {return(_name);};
-		const int			GetSgrade()	const {return(_Sgrade);};
-		const int			GetEgrage()	const {return(_Egrade);};
+		int					GetSgrade()	const {return(_Sgrade);};
+		int					GetEgrage()	const {return(_Egrade);};
 
 		void	beSigned(Bureaucrat &bureaucrat);
-		friend std::ostream &operator<<(std::ostream &os, const Form &obj);
 
 };
-
+std::ostream &operator<<(std::ostream &os, const Form &obj);

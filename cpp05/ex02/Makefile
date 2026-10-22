@@ -1,6 +1,6 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror
-NAME = a.out
+NAME = Bureacraut
 SRC = $(wildcard *.cpp)
 
 all:

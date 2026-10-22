@@ -1,5 +1,6 @@
 #include "Bureacraut.hpp"
 #include "Form.hpp"
+
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &b){
 	os << b.getName() << ", bureaucrat grade " << b.getGrade() << '\n';
 	return (os);
@@ -16,6 +17,8 @@ void	Bureaucrat::decreaseGrade(){
 	throw GradeTooLowException();
 	_grade++;
 }
+
+
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name){
 	if (grade > 150)
 		throw GradeTooLowException();
@@ -24,7 +27,8 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name){
 	else
 		_grade = grade;
 }
-Bureaucrat::Bureaucrat(const Bureaucrat &other){
+
+Bureaucrat::Bureaucrat(const Bureaucrat &other): _name(other._name){
 	std::cout << "Copy constructer called" << '\n';
 	this->_grade = other._grade;
 }

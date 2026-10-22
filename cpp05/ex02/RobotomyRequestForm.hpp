@@ -18,6 +18,6 @@ class RobotomyRequestForm : public AForm{
 	RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 	RobotomyRequestForm(const RobotomyRequestForm &other);
 	
-	void 		execute(Bureaucrat const &executor) const;
+	void 		execute(Bureaucrat const &executor) const override;
 
 };

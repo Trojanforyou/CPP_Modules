@@ -30,6 +30,6 @@ AForm *Intern::makeForm(std::string name, std::string target)
 		std::cout << "Intern failed to create a form (Fire him)" << '\n';
 		return(NULL);
 	}
-	std::cout << "Intern creates " << name;
+	std::cout << "Intern creates " << name << '\n';
 	return (form);
 }
