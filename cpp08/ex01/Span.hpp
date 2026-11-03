@@ -4,6 +4,9 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <climits>
+#include <cstdlib>
+#include <ctime>
 
 class Span
 {
@@ -14,6 +17,6 @@ class Span
 	public:
 		Span(unsigned int N): _N(N) {};
 		void			addNumber(int add);
-		unsigned int	shortestSpan();
+		int				shortestSpan();
 		unsigned int	longestSpan();
 };
