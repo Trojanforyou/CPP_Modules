@@ -1,37 +1,41 @@
 #include "BitcoinExchange.hpp"
 
-void Bitcoin::parse(std::string path)
+bool Bitcoin::parse(std::string path)
 {
-	// 0-31 day 0-12 month '-' day = 3 month = 2 year = 1 if = ',' == value
+	std::string valCheck;
 	std::ifstream file(path);
-	double afterComa;
 	std::string beforeComa;
+	double afterComa;
+
 	if (!file.is_open())
 	{
 		std::cerr << "file is not valid" << '\n';
-		return ;
+		return (false);
 	}
+	if (file.peek() == std::ifstream::traits_type::eof())
+	{
+		std::cout << "file is empty" << '\n';
+		return (false);
+	}
+	if (!parseHeader(file))
+		return (false);
 	std::string storage;
 	while (std::getline(file, storage, ','))
 	{
-		std::cout << beforeComa;
+		if (storage == "")
 		beforeComa = storage;
 		if (!validateDate(beforeComa))
-			return ;
+			return (false);
 		if (std::getline(file, storage, '\n'))
 		{
-			try
-			{
-				afterComa = stod(storage);
-			}
-			catch(const std::exception& e)
-			{
-				std::cerr << "data contains non valid value" << '\n';
-			}
-			
+			valCheck = storage;
+			// if (!validateValue(valCheck))
+			// 	return false;
+			afterComa = std::stod(valCheck);	
 		}
 		_container.emplace(beforeComa, afterComa);
 	}
+	return (true);
 }
 bool Bitcoin::validateDate(std::string date)
 {
@@ -45,7 +49,9 @@ bool Bitcoin::validateDate(std::string date)
 	}
 	std::string::size_type firstEnt = date.find('-');
 	std::string::size_type secondEnt = date.find('-', firstEnt + 1);
-
+	std::string::size_type errorEnt = date.find('-', secondEnt + 1);
+	if (errorEnt != std::string::npos)
+		return (false);
 	try
 	{
 		_year = std::stoi(date.substr(0, firstEnt + 1));
@@ -56,20 +62,54 @@ bool Bitcoin::validateDate(std::string date)
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
-	if (_year < 0 || _year > 2026)
+	if (_month == 02 && _day == 29)
+	{
+		if (!leapYearValidate())
+			return (false);
+	}
+	if (_year < 0)
 		return (false);
 	if (_month < 0 || _month > 12)
 		return (false);
 	if (_day < 0 || _day > 31)
 		return (false);
-	std::cout << _year << '\n';
-	std::cout << _month << '\n';
-	std::cout << _day << '\n';
-
 	return (true);
 }
-bool Bitcoin::validateValue(double val)
+// bool Bitcoin::validateValue(std::string val)
+// {
+// 	int dot = val.find('.');
+// }
+bool Bitcoin::leapYearValidate()
 {
-	std::
+	if (_year % 400 == 0 || (_year % 4 == 0 && _year % 100 != 0 ))
+		return (true);
+	else
+	{
+		std::cout << "not a leap year" << '\n';
+		return (false);
+	}
+	return (true);
+}
+bool Bitcoin::parseHeader(std::ifstream &file)
+{
+	std::string storage;
+	while (std::getline(file, storage))
+	{
+		if (storage == "\0" && storage == " ")
+			continue;
+		if (storage.find_first_not_of(" \t\r"))
+		{
+			if (storage != HEADER)
+			{
+				std::cout << "invalid header" << '\n';
+				return (false);
+			}
+			else
+			{
+				std::cout << "here";
+				return (true);
+			}
+		}
+	}
+	return (true);
 }
