@@ -6,7 +6,10 @@
 #include <map>
 #include <algorithm>
 
-#define HEADER "date,exchange_rate"
+#define	CSV_HEADER "date,exchange_rate"
+#define TXT_HEADER "date | value"
+#define CSV 1
+#define TXT 2
 class Bitcoin
 {
 	public:
@@ -16,8 +19,11 @@ class Bitcoin
 		std::map<std::string, double> _container;
 		bool parse(std::string path);
 		bool validateDate(std::string date);
-		// bool validateValue(std::string val);
+		bool validateValue(std::string val);
 		bool leapYearValidate();
-		bool parseHeader(std::ifstream &file);
+		int parseHeader(std::ifstream &file);
+		int sufixCheck(std::string path);
+		bool parseTxt(std::ifstream &file);
+		bool parseCsv(std::ifstream &file);
 		
 };
