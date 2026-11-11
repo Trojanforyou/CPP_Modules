@@ -16,6 +16,8 @@ class Bitcoin
 		int _year;
 		int _month;
 		int _day;
+		int _value;
+		int _date;
 		std::map<std::string, double> _container;
 		bool parse(std::string path);
 		bool validateDate(std::string date);
@@ -25,5 +27,6 @@ class Bitcoin
 		int sufixCheck(std::string path);
 		bool parseTxt(std::ifstream &file);
 		bool parseCsv(std::ifstream &file);
-		
+		bool validateCalendar();
+		bool validateDateTxt(std::ifstream &file);
 };
