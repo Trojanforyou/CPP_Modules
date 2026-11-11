@@ -97,7 +97,7 @@ int Bitcoin::parseHeader(std::ifstream &file)
 	std::string storage;
 	while (std::getline(file, storage))
 	{
-		if (storage.find_first_not_of(" \t\r")!= std::string::npos)
+		if (storage.find_first_not_of(" \t\r") != std::string::npos)
 		{
 			if (storage == CSV_HEADER)
 				return (CSV);
