@@ -7,9 +7,7 @@ bool Bitcoin::parse(std::string path)
 
 	int type = parseHeader(file);
 	int extention = sufixCheck(path);
-	// std::cout << path;
-	// std::cout << type;
-	// std::cout << extention;
+
 	if (!file.is_open())
 	{
 		std::cerr << "file is not valid" << '\n';
@@ -26,18 +24,22 @@ bool Bitcoin::parse(std::string path)
 	else if (type == TXT && extention == TXT)
 		fileType = "txt";
 	else
+	{
+		std::cout << "header is not valid" << '\n';
 		return (false);
+	}
 	if (fileType == "csv")
 		parseCsv(file);
 	else if (fileType == "txt")
 		parseTxt(file);
+
 	return (true);
 }
 bool Bitcoin::validateDate(std::string date)
 {
 	for (char c : date)
 	{
-		if (c == '-')
+		if (c == '-' || c == ' ')
 			continue;
 
 		if (!std::isdigit(c))
@@ -49,7 +51,7 @@ bool Bitcoin::validateDate(std::string date)
 	std::string::size_type firstEnt = date.find('-');
 	std::string::size_type secondEnt = date.find('-', firstEnt + 1);
 	std::string::size_type errorEnt = date.find('-', secondEnt + 1);
-	if (!firstEnt || !secondEnt || errorEnt != std::string::npos)
+	if (!secondEnt || errorEnt != std::string::npos)
 	{
 		std::cerr << "date is not valid" << '\n';
 		return (false);
@@ -71,9 +73,17 @@ bool Bitcoin::validateDate(std::string date)
 }
 bool Bitcoin::validateValue(std::string val)
 {
+	for (size_t i = 0; i < val.size(); i++)
+	{
+		if (val[i] == '.' && (i == 0 || i == val.size() - 1))
+		{
+			std::cout << "no value after [VALUE] delim" << '\n';
+			return (false);
+		}
+	}
 	for (char c : val)
 	{
-		if (c == '.')
+		if (c == '.' || c == ' ')
 			continue;
 		if (!std::isdigit(c))
 		{
@@ -83,9 +93,8 @@ bool Bitcoin::validateValue(std::string val)
 	}
 	std::string::size_type delim = val.find('.');
 	std::string::size_type delimErr = val.find('.', delim + 1);
-	if (delimErr != std::string::npos)
+	if (delimErr != std::string::npos || val.empty())
 		return (false);
-	
 	return (true);
 }
 bool Bitcoin::leapYearValidate()
@@ -158,6 +167,12 @@ bool Bitcoin::validateDateTxt(std::ifstream &file)
 {
 	std::string storage;
 
+	std::getline(file, storage);
+	if (storage.find(',') != std::string::npos)
+	{
+		std::cout << "TXT file has non valid delim" << '\n';
+		return (false);
+	}
 	while (std::getline(file, storage, '|'))
 	{
 		if (!validateDate(storage))
@@ -215,11 +230,8 @@ bool Bitcoin::parseCsv(std::ifstream &file)
 	std::string valCheck;
 	double 		afterDelim;
 
- 	std::getline(file, storage);
 	while (std::getline(file, storage, ','))
 	{
-		if (storage == CSV_HEADER)
-			continue;
 		beforeDelim = storage;
 		if (!validateDate(beforeDelim))
 			return (false);
@@ -227,7 +239,7 @@ bool Bitcoin::parseCsv(std::ifstream &file)
 		{
 			valCheck = storage;
 			if (!validateValue(valCheck))
-				return false;
+				return (false);
 			afterDelim = std::stod(valCheck);	
 		}
 		_container.emplace(beforeDelim, afterDelim);
@@ -253,8 +265,18 @@ bool Bitcoin::parseTxt(std::ifstream &file)
 			valCheck = storage;
 			if (!validateValue(valCheck))
 				return false;
-			afterDelim = std::stod(valCheck);	
+			afterDelim = std::stod(valCheck);
+			if (afterDelim > 1000)
+			{
+				std::cout << "value is out of the bond" << '\n';
+				return (false);
+			}
 		}
 	}
 	return (true);
+}
+
+void Bitcoin::BitcoinExcange()
+{
+	_container.upper_bound()
 }

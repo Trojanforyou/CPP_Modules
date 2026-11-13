@@ -29,4 +29,5 @@ class Bitcoin
 		bool parseCsv(std::ifstream &file);
 		bool validateCalendar();
 		bool validateDateTxt(std::ifstream &file);
+		void BitcoinExcange();
 };
